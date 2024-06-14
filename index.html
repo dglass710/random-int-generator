@@ -93,11 +93,22 @@
                 return;
             }
 
-            let randomNumber;
-            do {
-                randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-            } while (excluded.includes(randomNumber));
+            // Generate list of valid numbers
+            const validNumbers = [];
+            for (let i = min; i <= max; i++) {
+                if (!excluded.includes(i)) {
+                    validNumbers.push(i);
+                }
+            }
 
+            // Check if there are any valid numbers
+            if (validNumbers.length === 0) {
+                document.getElementById('randomNumber').innerText = 'No valid numbers available in the given range.';
+                return;
+            }
+
+            // Generate a random number from the valid numbers
+            const randomNumber = validNumbers[Math.floor(Math.random() * validNumbers.length)];
             document.getElementById('randomNumber').innerText = `Random Number: ${randomNumber}`;
         }
 
@@ -105,4 +116,3 @@
     </script>
 </body>
 </html>
-
